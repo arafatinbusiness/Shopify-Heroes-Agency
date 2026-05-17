@@ -1,0 +1,8 @@
+# robots.txt for Shopify Heroes Agency
+# https://shopifyheroesagency.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://shopifyheroesagency.com/sitemap.xml
