@@ -328,6 +328,7 @@ const StatusBar = () => {
 const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -336,6 +337,11 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
   }, []);
 
   const navLinks = ["Home", "Portfolio", "Solutions", "More", "Contact"];
+
+  const moreSubLinks = [
+    { label: "Screen Record", href: "https://screenrecord.shopifyheroesagency.com" },
+  ];
+
 
   return (
     <nav className={`fixed top-[20px] left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md h-[60px] md:h-[70px] shadow-2xl" : "bg-white h-[70px] md:h-[80px]"}`}>
@@ -357,22 +363,63 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a 
-              key={link} 
-              href={link === "Contact" ? "#" : `#${link.toLowerCase()}`}
-              onClick={(e) => {
-                if (link === "Contact") {
-                  e.preventDefault();
-                  onContactClick();
-                }
-              }}
-              className="text-sm font-medium text-black/70 hover:text-black transition-colors relative group"
-            >
-              {link}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-red transition-all group-hover:w-full" />
-            </a>
+            link === "More" ? (
+              <div
+                key={link}
+                className="relative group"
+                onMouseEnter={() => setMoreMenuOpen(true)}
+                onMouseLeave={() => setMoreMenuOpen(false)}
+              >
+                <a
+                  href="#more"
+                  className="text-sm font-medium text-black/70 hover:text-black transition-colors relative"
+                >
+                  {link}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-red transition-all group-hover:w-full" />
+                </a>
+                <AnimatePresence>
+                  {moreMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-black/5 overflow-hidden"
+                    >
+                      {moreSubLinks.map((sub) => (
+                        <a
+                          key={sub.label}
+                          href={sub.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-4 py-3 text-sm font-medium text-black/70 hover:text-brand-red hover:bg-black/5 transition-colors"
+                        >
+                          {sub.label}
+                        </a>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <a 
+                key={link} 
+                href={link === "Contact" ? "#" : `#${link.toLowerCase()}`}
+                onClick={(e) => {
+                  if (link === "Contact") {
+                    e.preventDefault();
+                    onContactClick();
+                  }
+                }}
+                className="text-sm font-medium text-black/70 hover:text-black transition-colors relative group"
+              >
+                {link}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-red transition-all group-hover:w-full" />
+              </a>
+            )
           ))}
         </div>
+
 
         {/* CTAs */}
         <div className="hidden md:flex items-center gap-6">
@@ -407,20 +454,40 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
           >
             <div className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
-                <a 
-                  key={link} 
-                  href={link === "Contact" ? "#" : `#${link.toLowerCase()}`} 
-                  className="text-lg font-bold text-black/70 hover:text-brand-red"
-                  onClick={(e) => {
-                    setMobileMenuOpen(false);
-                    if (link === "Contact") {
-                      e.preventDefault();
-                      onContactClick();
-                    }
-                  }}
-                >
-                  {link}
-                </a>
+                link === "More" ? (
+                  <div key={link}>
+                    <span className="text-lg font-bold text-black/70 block mb-2">{link}</span>
+                    <div className="ml-4 flex flex-col gap-2 border-l-2 border-brand-red/20 pl-4">
+                      {moreSubLinks.map((sub) => (
+                        <a
+                          key={sub.label}
+                          href={sub.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-base font-semibold text-black/50 hover:text-brand-red transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {sub.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <a 
+                    key={link} 
+                    href={link === "Contact" ? "#" : `#${link.toLowerCase()}`} 
+                    className="text-lg font-bold text-black/70 hover:text-brand-red"
+                    onClick={(e) => {
+                      setMobileMenuOpen(false);
+                      if (link === "Contact") {
+                        e.preventDefault();
+                        onContactClick();
+                      }
+                    }}
+                  >
+                    {link}
+                  </a>
+                )
               ))}
               <hr className="border-black/5" />
               <div className="flex flex-col gap-4">
@@ -431,6 +498,7 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
           </motion.div>
         )}
       </AnimatePresence>
+
     </nav>
   );
 };
