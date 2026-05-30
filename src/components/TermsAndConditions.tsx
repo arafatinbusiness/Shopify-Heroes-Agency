@@ -1,9 +1,15 @@
 import { motion } from "motion/react";
 import { ChevronRight, Shield, FileText, Lock, AlertCircle, Check } from "lucide-react";
+import SEO from "./SEO";
 
 const TermsAndConditions = () => {
   return (
     <section className="min-h-screen bg-white pt-32 pb-20 px-6">
+      <SEO
+        title="Terms and Conditions"
+        description="Review the terms and conditions for Shopify Heroes Agency services including payment terms, subscriptions, and legal agreements."
+        canonical="https://shopifyheroesagency.com/terms"
+      />
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div

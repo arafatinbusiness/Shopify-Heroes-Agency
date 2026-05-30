@@ -1,9 +1,15 @@
 import { motion } from "motion/react";
 import { ChevronRight, Shield, Lock, Eye, Database, UserCheck, Mail, Globe } from "lucide-react";
+import SEO from "./SEO";
 
 const PrivacyPolicy = () => {
   return (
     <section className="min-h-screen bg-white pt-32 pb-20 px-6">
+      <SEO
+        title="Privacy Policy"
+        description="Learn how Shopify Heroes Agency collects, uses, and protects your personal information. Our commitment to data privacy and security."
+        canonical="https://shopifyheroesagency.com/privacy"
+      />
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div

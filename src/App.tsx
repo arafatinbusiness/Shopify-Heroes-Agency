@@ -27,6 +27,8 @@ import React from "react";
 import { db } from "./lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import SEO from "./components/SEO";
+import StructuredData from "./components/StructuredData";
 
 // --- Components ---
 
@@ -1088,16 +1090,13 @@ const BlogSection = () => {
           viewport={{ once: true }}
           className="inline-block"
         >
-          <button 
-            onClick={() => {
-              // This would link to a separate blog page
-              alert("This would navigate to the blog page");
-            }}
+          <Link 
+            to="/blog"
             className="inline-flex items-center gap-2 bg-black hover:bg-brand-red text-white font-black py-4 px-10 rounded-sm text-lg uppercase tracking-tight transition-all hover:scale-105 active:scale-95 shadow-lg"
           >
             Explore All Articles
             <ChevronRight className="w-6 h-6" />
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>
@@ -1248,6 +1247,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen font-sans selection:bg-white selection:text-brand-red overflow-x-hidden">
+      <SEO
+        title="Best Shopify Web Design Agency & Plus Developer"
+        description="Expert Shopify developer providing custom store setup, technical fixes, and ongoing support. Stop fighting with your theme and get back to selling."
+        canonical="https://shopifyheroesagency.com/"
+      />
+      <StructuredData />
       <StatusBar />
       <Navbar onContactClick={() => setIsModalOpen(true)} />
       <main>
@@ -1295,6 +1300,7 @@ export default function App() {
               <li><a href="#home" className="hover:text-brand-red transition-colors">Home</a></li>
               <li><a href="#portfolio" className="hover:text-brand-red transition-colors">Portfolio</a></li>
               <li><a href="#solutions" className="hover:text-brand-red transition-colors">Solutions</a></li>
+              <li><Link to="/blog" className="hover:text-brand-red transition-colors">Blog</Link></li>
               <li><Link to="/terms" className="hover:text-brand-red transition-colors">Terms & Conditions</Link></li>
               <li><Link to="/privacy" className="hover:text-brand-red transition-colors">Privacy Policy</Link></li>
               <li><Link to="/refund" className="hover:text-brand-red transition-colors">Refund Policy</Link></li>

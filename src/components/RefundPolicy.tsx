@@ -1,9 +1,15 @@
 import { motion } from "motion/react";
 import { ChevronRight, DollarSign, Clock, CheckCircle, XCircle, AlertCircle, CreditCard } from "lucide-react";
+import SEO from "./SEO";
 
 const RefundPolicy = () => {
   return (
     <section className="min-h-screen bg-white pt-32 pb-20 px-6">
+      <SEO
+        title="Refund Policy"
+        description="Shopify Heroes Agency refund policy. Learn about our fair and transparent refund terms for project-based, retainer, and hourly services."
+        canonical="https://shopifyheroesagency.com/refund"
+      />
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
