@@ -338,7 +338,7 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = ["Home", "Portfolio", "Solutions", "More", "Contact"];
+  const navLinks = ["Home", "Portfolio", "Solutions", "Blog", "More", "Contact"];
 
   const moreSubLinks = [
     { label: "Screen Record", href: "https://screenrecord.shopifyheroesagency.com" },
@@ -403,6 +403,15 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
                   )}
                 </AnimatePresence>
               </div>
+            ) : link === "Blog" ? (
+              <Link
+                key={link}
+                to="/blog"
+                className="text-sm font-medium text-black/70 hover:text-black transition-colors relative group"
+              >
+                {link}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-red transition-all group-hover:w-full" />
+              </Link>
             ) : (
               <a 
                 key={link} 
@@ -474,6 +483,15 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
                       ))}
                     </div>
                   </div>
+                ) : link === "Blog" ? (
+                  <Link
+                    key={link}
+                    to="/blog"
+                    className="text-lg font-bold text-black/70 hover:text-brand-red"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link}
+                  </Link>
                 ) : (
                   <a 
                     key={link} 
